@@ -8,8 +8,12 @@ const mongo = new MongoClient(mongoURI, {
 });
 
 const mongoRun = async () => {
-    await mongo.connect();
-    console.log('Connected to MongoDB Cloud');
+    try {
+        await mongo.connect();
+        console.log('Connected to MongoDB Cloud');
+    } catch {
+        console.log('Could not connect to MongoDB Cloud');
+    }
 }
 mongoRun();
 
