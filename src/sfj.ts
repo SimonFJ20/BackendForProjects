@@ -26,8 +26,12 @@ const mongo = new MongoClient(mongoURI, {
 const router = express.Router();
 
 (async () => {
-    await mongo.connect();
-    console.log('Connected to MongoDB Cloud');
+    try {
+        await mongo.connect();
+        console.log('Connected to MongoDB Cloud');
+    } catch {
+        console.log('Could not connect to MongoDB Cloud');
+    }
 })()
 
 
@@ -42,6 +46,7 @@ router.post('/newproject', async (req, res) => {
         res.json({error: true}).status(500);
     }
 });
+
 
 
 
