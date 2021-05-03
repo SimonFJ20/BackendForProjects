@@ -22,7 +22,7 @@ const netlifyRedirect = (router: Router) => {
 const server = async () => {
     config();
 
-    const port = parseInt(<string>process.env.HTTPPORT);
+    const port = parseInt(<string>process.env.HTTP_PORT1);
 
     const app = express();
     const server = createServer(app);
