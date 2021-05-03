@@ -3,6 +3,7 @@ import express, { json, Router, urlencoded } from "express";
 import { createServer } from 'http';
 import cors from 'cors';
 import { join } from 'path';
+import { sfjApi } from "./sfjApi";
 
 // redirect to simonfromjakobsen.netlify.app
 const netlifyRedirect = (router: Router) => {
@@ -30,12 +31,14 @@ const server = async () => {
     app.use(json());
     app.use(urlencoded({extended: true}));
 
+
+    app.use('/sfj', await sfjApi());
     netlifyRedirect(app);
     app.use(express.static(join(__dirname, '../public')));
 
     server.listen(port, () => {
-        console.log('BFP/main on port', port);
+        console.log('BFP on port', port);
     });
 }
 
-server().catch(error => console.error('BFP/main failed to start', error));
+server().catch(error => console.error('BFP failed to start', error));
