@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import express, { json, Router, urlencoded } from "express";
 import { createServer } from 'http';
 import cors from 'cors';
+import { join } from 'path';
 
 // redirect to simonfromjakobsen.netlify.app
 const netlifyRedirect = (router: Router) => {
@@ -30,6 +31,7 @@ const server = async () => {
     app.use(urlencoded({extended: true}));
 
     netlifyRedirect(app);
+    app.use(express.static(join(__dirname, '../public')));
 
     server.listen(port, () => {
         console.log('BFP/main on port', port);
